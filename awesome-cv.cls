@@ -46,7 +46,22 @@
 %-------------------------------------------------------------------------------
 %                3rd party packages
 %-------------------------------------------------------------------------------
+
+
+
 %\RequirePackage{tikz}
+\usepackage{pgfplots}
+\usepgflibrary{fpu}%----- this
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.9}
+
+
+
+\pgfkeys{/pgf/fpu}
+\pgfmathparse{16383+1}
+\edef\tmp{\pgfmathresult}
+\pgfkeys{/pgf/fpu=false}
 
 
 
@@ -230,27 +245,28 @@
 % Command for printing skill progress bars
 \newcommand\skills[1]{ 
 %	\renewcommand{\skills}{
-%		\begin{tikzpicture}
+%		\begin{tikzpicture}!~
 %			\foreach [count=\i] \x/\y in {#1}{
 %				\begin{tabular}{p{2cm}p{6cm}}
 %					\draw[fill=awesome-skyblue,awesome-skyblue] (11,\i) rectangle (16,\i+0.2);
 %					\draw[fill=white,awesome-red](11,\i) rectangle (11+\y,\i+0.2);
-%						&
+%						& ((\y*360)/100) ,no marks,/pgf/fpu,/pgf/fpu/output format=fixed
 %					\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext}
 %					\node at (0,\i+0.1){\x};
 %				\end{tabular}
 %			}
 %		\end{tikzpicture}
 
-		
+\begin{minipage}[t]{12cm}		
 			\foreach [count=\i] \x/\y in {#1}{
 				\begin{tikzpicture}
 					\draw[fill=awesome-skyblue,awesome-skyblue] (0,0) -- (0:3mm) arc (0:360:3mm) arc (0:0:3mm) -- cycle;
-					\draw[fill=white,awesome-red] (0,0) -- (0:3mm) arc (0:((\y*360)/100):3mm) arc (0:0:3mm) -- cycle;
+					\draw[fill=white,awesome-red] (0,0) -- (0:3mm) arc (0:(\y*36)/10:3mm) arc (0:0:3mm) -- cycle;
 					\fontsize{9pt}{1em}\bodyfontlight\color{text}
 					\node [left,text height=0.5cm, text width=2cm] at (-0.3,0.2) {\x};
 				\end{tikzpicture}
 			}
+\end{minipage}
 }
 
 \newcommand{\makeskills}{
@@ -676,13 +692,22 @@
     \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} r L{\textwidth * \real{0.9}}}
 }{%
     \end{tabular*}
+	
   \end{center}
+	\hspace{2cm}
+	\begin{tikzpicture}
+		\draw[fill=awesome-red] (0,0) -- (0:1mm) arc (0:360:1mm) arc (0:0:1mm) -- cycle;
+		\fontsize{9pt}{1em}\bodyfontlight\color{text}
+		\node [right] at (1,0) {Pour le niveau de compétence};
+	\end{tikzpicture}
 }
 % Define a line of cv information(skill)
 % Usage: \cvskill{<type>}{<skillset>}
 \newcommand*{\cvskill}[2]{%
 %	\skilltypestyle{#1} & \skillsetstyle{#2} \\
+
 	\skilltypestyle{#1} & \skills{#2} \\
+
 }
 
 % Define an environment for cvitems(for cventry)

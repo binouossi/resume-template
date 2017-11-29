@@ -26,6 +26,8 @@
 
 \documentclass[11pt, a4paper]{awesome-cv} % A4 paper size by default, use 'letterpaper' for US letter
 
+
+
 \geometry{left=2cm, top=1.5cm, right=2cm, bottom=2cm, footskip=.5cm} % Configure page margins with geometry
 
 \fontdir[fonts/] % Specify the location of the included fonts
@@ -70,11 +72,15 @@
 %----------------------------------------------------------------------------------------
 \begin{document}
 
+%\begin{tikzpicture}[remember picture,overlay]
+%   		\node [rectangle, fill=awesome-skyblue, anchor=north, minimum width=9cm, minimum height=%\paperheight+6cm] (box) at (-5cm,5cm){};
+%	\end{tikzpicture}
+
 \makecvheader % Print the header
 
 \begin{figure}[!h]
 \centering
-\includegraphics[scale=0.02]{pp.jpg}
+\includegraphics[scale=0.5]{pp}
 \end{figure}
 %----------------------------------------------------------------------------------------
 %	CV/RESUME CONTENT
@@ -86,7 +92,7 @@
 \input{cv-sections/skills.tex}
 
 %\makeskills
-%\newpage
+\newpage
 \input{cv-sections/experience.tex}
 
 %\newpage % Force a new page for looks
@@ -98,7 +104,7 @@
 %\input{cv-sections/committees.tex}
 \input{cv-sections/qualite.tex}
 
-\vspace{10cm}
+\vspace{3cm}% you should ajust this distance, to send your signature on the botom of the page.
 \begin{flushleft}
 Je certifie valides et vraies les informations ci-dessus.
 \end{flushleft}
